@@ -34,6 +34,10 @@ jobs:
       - name: Enable Developer Command Prompt
         uses: ilammy/msvc-dev-cmd@v1.9.0
 
+      - name: Add conan remote
+        run: conan remote add -f ror-deps https://artifactory.anotherfoxguy.com/artifactory/api/conan/rigs-of-rods
+        shell: cmd
+
       - name: Dump Conan packages
         run: conan install . -b=missing -pr=./VS-2019-Rel
         shell: cmd
