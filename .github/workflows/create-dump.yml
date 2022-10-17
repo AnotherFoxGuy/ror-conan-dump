@@ -15,14 +15,11 @@ jobs:
 
       - uses: actions/checkout@v3
 
-      - name: Install Microsoft DirectX SDK and Build tools
+      - name: Install Build tools
         shell: cmake -P {0}
         run: |
-          file(MAKE_DIRECTORY $ENV{DXSDK_DIR})
-          file(DOWNLOAD http://prdownloads.sourceforge.net/rigs-of-rods/DirectX-SDK.zip "$ENV{TMP}/DirectX.zip" SHOW_PROGRESS)
-          execute_process(COMMAND ${CMAKE_COMMAND} -E tar xzf "$ENV{TMP}/DirectX.zip" WORKING_DIRECTORY "$ENV{DXSDK_DIR}")
           file(MAKE_DIRECTORY $ENV{BUILD_TOOLS_PATH})
-          file(DOWNLOAD http://prdownloads.sourceforge.net/rigs-of-rods/build-tools.zip "$ENV{TMP}/build-tools.zip" SHOW_PROGRESS)
+          file(DOWNLOAD https://cdn.anotherfoxguy.com/build-tools.zip "$ENV{TMP}/build-tools.zip" SHOW_PROGRESS)
           execute_process(COMMAND ${CMAKE_COMMAND} -E tar xzf "$ENV{TMP}/build-tools.zip" WORKING_DIRECTORY "$ENV{BUILD_TOOLS_PATH}")
 
       - name: Cache conan
@@ -35,7 +32,9 @@ jobs:
         uses: ilammy/msvc-dev-cmd@v1.10.0
 
       - name: Add conan remote
-        run: conan remote add -f ror-deps https://artifactory.anotherfoxguy.com/artifactory/api/conan/rigs-of-rods
+        run: |
+          conan remote add gitea https://git.anotherfoxguy.com/api/packages/AnotherFoxGuy/conan
+          conan config set general.revisions_enabled=1
         shell: cmd
 
       - name: Dump Conan packages
