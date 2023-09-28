@@ -30,6 +30,7 @@ jobs:
 
       - name: Add conan remote
         run: |
+          conan profile detect --force
           conan remote add ror-conan https://git.anotherfoxguy.com/api/packages/rorbot/conan -f
         shell: cmd
 
