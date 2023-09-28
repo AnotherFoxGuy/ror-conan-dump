@@ -45,5 +45,5 @@ jobs:
           path: dependencies
 
       - name: Clean Conan pkgs
-        run: conan remove "*" -fsb
+        run: conan cache clean "*" -sbd
         shell: cmd
