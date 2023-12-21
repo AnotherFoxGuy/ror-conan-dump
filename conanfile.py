@@ -26,3 +26,15 @@ class RoR(ConanFile):
         self.requires("libpng/1.6.39", override=True)
         self.requires("libwebp/1.3.2", override=True)
         self.requires("zlib/1.2.13", override=True)
+
+    def generate(self):
+        for dep in self.dependencies.values():
+            for f in dep.cpp_info.bindirs:
+                self.cp_data(f)
+            for f in dep.cpp_info.libdirs:
+                self.cp_data(f)
+
+    def cp_data(self, src):
+        bindir = os.path.join(self.build_folder, "deploy")
+        copy(self, "*.dll", src, bindir, False)
+        copy(self, "*.so*", src, bindir, False)
