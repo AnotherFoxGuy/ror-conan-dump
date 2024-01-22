@@ -20,7 +20,7 @@ jobs:
         shell: cmd
 
       - name: Cache conan packages
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           key: conan-windows-${{ hashFiles('conanfile.py') }}
           path: ~/.conan2
