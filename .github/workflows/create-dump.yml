@@ -41,7 +41,7 @@ jobs:
       - name: Upload dump folder
         uses: actions/upload-artifact@v4
         with:
-          name: Deps_31_VS_2019_Release
+          name: Deps_32_VS_2019_Release
           path: dependencies
 
       - name: Clean Conan pkgs
