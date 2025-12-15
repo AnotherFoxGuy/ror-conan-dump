@@ -39,7 +39,7 @@ jobs:
         shell: cmd
 
       - name: Upload dump folder
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: Deps_32_VS_2019_Release
           path: dependencies
